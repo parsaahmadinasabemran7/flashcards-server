@@ -1,18 +1,20 @@
 {
   "name": "flashcards-server",
   "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "module": "commonjs",
+  "description": "Hardened Node.js/Express API for a flashcard study application",
+  "private": true,
+  "type": "commonjs",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/server.js",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
@@ -22,7 +24,7 @@
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.2",
-    "pino": "^10.1.0"
+    "pino": "^9.6.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
