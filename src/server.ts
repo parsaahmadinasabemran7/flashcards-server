@@ -1,6 +1,7 @@
 const http = require('http');
 const app = require('./app');
 const { ENV } = require('./config/env');
+const { connectDatabase } = require('./config/database');
 
 const PORT = Number(ENV.PORT);
 
@@ -9,15 +10,18 @@ if (Number.isNaN(PORT)) {
     process.exit(1);
 }
 
-const server = http.createServer(app);
+async function startServer() {
+    await connectDatabase();
 
-server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
-});
+    const server = http.createServer(app);
 
-/**
- * Fail fast on expected errors
- */
+    server.listen(PORT, () => {
+        console.log(`Server listening on port ${PORT}`);
+    });
+}
+
+startServer();
+
 process.on('uncaughtException', (err) => {
     console.error('Uncaught Exception:', err);
     process.exit(1);
